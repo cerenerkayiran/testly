@@ -2,6 +2,8 @@
 
 A full-stack web application that generates exam questions using OpenAI's GPT models through GitHub Models API. The application supports both English🇺🇸 and Turkish🇹🇷 languages and allows users to generate different types of questions (open-ended, multiple-choice, and true/false).
 
+See demo at: https://testly-cyan.vercel.app/
+
 ## Features
 
 - Generate exam questions in English or Turkish
