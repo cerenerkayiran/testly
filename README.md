@@ -67,3 +67,6 @@ npm run dev
 - shadcn/ui components
 - GitHub Models API (OpenAI GPT-4o)
 - docx (for Word document generation)
+
+---
+*updated with environment variable configuration*
