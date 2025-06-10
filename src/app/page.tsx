@@ -39,6 +39,29 @@ export default function Home() {
     setLoading(true);
     setError('');
 
+    // Validation
+    if (!formData.subject.trim()) {
+      setError(t.subjectRequired);
+      setLoading(false);
+      return;
+    }
+
+    if (formData.topics.length === 0) {
+      setError(t.topicsRequired);
+      setLoading(false);
+      return;
+    }
+
+    const totalQuestions = formData.questionCounts['open-ended'] + 
+                          formData.questionCounts['multiple-choice'] + 
+                          formData.questionCounts['true-false'];
+    
+    if (totalQuestions === 0) {
+      setError(t.questionsRequired);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('/api/generate', {
         method: 'POST',
@@ -62,6 +85,7 @@ export default function Home() {
     setError('');
 
     try {
+      const currentQuestion = questions[index];
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,6 +93,7 @@ export default function Home() {
           ...formData,
           language,
           regenerateIndex: index,
+          regenerateQuestionType: currentQuestion.type,
         }),
       });
 
