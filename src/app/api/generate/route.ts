@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { QuestionFormData, GeneratedQuestion } from '@/types';
+import { QuestionFormData, GeneratedQuestion, QuestionType } from '@/types';
+
+interface RegenerateRequest extends QuestionFormData {
+  regenerateIndex?: number;
+  regenerateQuestionType?: QuestionType;
+}
 
 export async function POST(request: Request) {
   try {
-    const data: any = await request.json();
+    const data: RegenerateRequest = await request.json();
     const { subject, topics, difficulty, questionCounts, language, regenerateIndex, regenerateQuestionType } = data;
 
     let prompt: string;
