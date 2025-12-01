@@ -14,6 +14,9 @@ export async function POST(request: Request) {
 
     // Check if GitHub PAT is available
     const token = process.env.GITHUB_PAT;
+    console.log('Environment check - GITHUB_PAT exists:', !!token);
+    console.log('Token prefix:', token?.substring(0, 20) + '...');
+    
     if (!token) {
       console.error('GITHUB_PAT environment variable is not set');
       return NextResponse.json(
