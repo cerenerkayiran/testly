@@ -69,12 +69,15 @@ export default function Home() {
         body: JSON.stringify({ ...formData, language }),
       });
 
-      if (!response.ok) throw new Error('Failed to generate questions');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to generate questions');
+      }
 
       const data = await response.json();
       setQuestions(data.questions);
-    } catch (_) {
-      setError(t.error);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : t.error);
     } finally {
       setLoading(false);
     }
@@ -97,14 +100,17 @@ export default function Home() {
         }),
       });
 
-      if (!response.ok) throw new Error('Failed to regenerate question');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to regenerate question');
+      }
 
       const data = await response.json();
       const newQuestions = [...questions];
       newQuestions[index] = data.questions[0];
       setQuestions(newQuestions);
-    } catch (_) {
-      setError(t.error);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : t.error);
     } finally {
       setLoading(false);
     }
