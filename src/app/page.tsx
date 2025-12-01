@@ -145,7 +145,7 @@ export default function Home() {
                   id="subject"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                  className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 placeholder:text-[13px]"
                   placeholder={language === 'en' ? "Enter subject name" : "Konu adını girin"}
                 />
               </div>
@@ -169,7 +169,7 @@ export default function Home() {
                       topics
                     }));
                   }}
-                  className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 min-h-[60px] sm:min-h-[80px] resize-none"
+                  className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 min-h-[60px] sm:min-h-[80px] resize-none placeholder:text-[13px]"
                   placeholder={language === 'en' ? "Enter topics separated by commas" : "Konuları virgülle ayırarak girin"}
                 />
               </div>
@@ -200,67 +200,82 @@ export default function Home() {
                     <Label htmlFor="open-ended" className="text-xs font-medium text-gray-600 block truncate">
                       {t.openEnded}
                     </Label>
-                    <Input
-                      id="open-ended"
-                      type="number"
-                      min="0"
-                      value={formData.questionCounts['open-ended'] === 0 ? '' : formData.questionCounts['open-ended']}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/^0+(\d)/, '$1');
-                        setFormData({
-                          ...formData,
-                          questionCounts: {
-                            ...formData.questionCounts,
-                            'open-ended': val === '' ? 0 : parseInt(val)
-                          }
-                        });
-                      }}
-                      className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-center h-10"
-                    />
+                    <Select
+                      value={formData.questionCounts['open-ended'].toString()}
+                      onValueChange={(value) => setFormData({
+                        ...formData,
+                        questionCounts: {
+                          ...formData.questionCounts,
+                          'open-ended': parseInt(value)
+                        }
+                      })}
+                    >
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200">
+                        <SelectItem value="0">0</SelectItem>
+                        <SelectItem value="1">1</SelectItem>
+                        <SelectItem value="2">2</SelectItem>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="4">4</SelectItem>
+                        <SelectItem value="5">5</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="multiple-choice" className="text-xs font-medium text-gray-600 block truncate">
                       {t.multipleChoice}
                     </Label>
-                    <Input
-                      id="multiple-choice"
-                      type="number"
-                      min="0"
-                      value={formData.questionCounts['multiple-choice'] === 0 ? '' : formData.questionCounts['multiple-choice']}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/^0+(\d)/, '$1');
-                        setFormData({
-                          ...formData,
-                          questionCounts: {
-                            ...formData.questionCounts,
-                            'multiple-choice': val === '' ? 0 : parseInt(val)
-                          }
-                        });
-                      }}
-                      className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-center h-10"
-                    />
+                    <Select
+                      value={formData.questionCounts['multiple-choice'].toString()}
+                      onValueChange={(value) => setFormData({
+                        ...formData,
+                        questionCounts: {
+                          ...formData.questionCounts,
+                          'multiple-choice': parseInt(value)
+                        }
+                      })}
+                    >
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200">
+                        <SelectItem value="0">0</SelectItem>
+                        <SelectItem value="1">1</SelectItem>
+                        <SelectItem value="2">2</SelectItem>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="4">4</SelectItem>
+                        <SelectItem value="5">5</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="true-false" className="text-xs font-medium text-gray-600 block truncate">
                       {t.trueFalse}
                     </Label>
-                    <Input
-                      id="true-false"
-                      type="number"
-                      min="0"
-                      value={formData.questionCounts['true-false'] === 0 ? '' : formData.questionCounts['true-false']}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/^0+(\d)/, '$1');
-                        setFormData({
-                          ...formData,
-                          questionCounts: {
-                            ...formData.questionCounts,
-                            'true-false': val === '' ? 0 : parseInt(val)
-                          }
-                        });
-                      }}
-                      className="border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-center h-10"
-                    />
+                    <Select
+                      value={formData.questionCounts['true-false'].toString()}
+                      onValueChange={(value) => setFormData({
+                        ...formData,
+                        questionCounts: {
+                          ...formData.questionCounts,
+                          'true-false': parseInt(value)
+                        }
+                      })}
+                    >
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200">
+                        <SelectItem value="0">0</SelectItem>
+                        <SelectItem value="1">1</SelectItem>
+                        <SelectItem value="2">2</SelectItem>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="4">4</SelectItem>
+                        <SelectItem value="5">5</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
