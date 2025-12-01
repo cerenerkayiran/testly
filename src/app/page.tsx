@@ -210,7 +210,7 @@ export default function Home() {
                         }
                       })}
                     >
-                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center" aria-label="Select number">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border border-gray-200">
@@ -237,7 +237,7 @@ export default function Home() {
                         }
                       })}
                     >
-                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center" aria-label="Select number">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border border-gray-200">
@@ -264,7 +264,7 @@ export default function Home() {
                         }
                       })}
                     >
-                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center">
+                      <SelectTrigger className="border border-gray-200 bg-white focus:border-blue-500 focus:ring-blue-500 h-10 text-sm [&>span]:flex-1 [&>span]:text-center" aria-label="Select number">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="bg-white border border-gray-200">
