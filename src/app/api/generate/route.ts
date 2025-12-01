@@ -97,9 +97,19 @@ export async function POST(request: Request) {
 
   } catch (error) {
     console.error('Error generating questions:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
+    
+    // Log the full error for debugging
+    if (error && typeof error === 'object') {
+      console.error('Error keys:', Object.keys(error));
+      console.error('Error string:', String(error));
+    }
     
     // Provide more specific error messages
     if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      
       if (error.message.includes('timeout')) {
         return NextResponse.json(
           { error: 'Request timeout. Please try again with fewer questions.' },
