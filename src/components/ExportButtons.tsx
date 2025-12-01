@@ -176,17 +176,17 @@ const ExportButtons: React.FC<ExportButtonsProps> = ({ examData, translations })
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto">
       <Button
         onClick={handleSaveQuestions}
-        className="bg-gradient-to-r from-[#333446] via-[#7F8CAA] to-[#B8CFCE] hover:from-[#2a2d3a] hover:via-[#6f7a96] hover:to-[#a8bfbe] text-white py-2 px-4 text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] border-0"
+        className="bg-gradient-to-r from-[#333446] via-[#7F8CAA] to-[#B8CFCE] hover:from-[#2a2d3a] hover:via-[#6f7a96] hover:to-[#a8bfbe] text-white py-2 px-3 sm:px-4 text-xs sm:text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] border-0"
         size="sm"
       >
         {translations.saveQuestions}
       </Button>
       <Button
         onClick={handleSaveAnswerKey}
-        className="bg-gradient-to-r from-[#333446] via-[#7F8CAA] to-[#B8CFCE] hover:from-[#2a2d3a] hover:via-[#6f7a96] hover:to-[#a8bfbe] text-white py-2 px-4 text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] border-0"
+        className="bg-gradient-to-r from-[#333446] via-[#7F8CAA] to-[#B8CFCE] hover:from-[#2a2d3a] hover:via-[#6f7a96] hover:to-[#a8bfbe] text-white py-2 px-3 sm:px-4 text-xs sm:text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] border-0"
         size="sm"
       >
         {translations.saveAnswerKey}
