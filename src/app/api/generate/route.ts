@@ -98,15 +98,22 @@ export async function POST(request: Request) {
     
     // Provide more specific error messages
     if (error instanceof Error) {
+      console.error('Full error details:', {
+        message: error.message,
+        name: error.name,
+        cause: (error as NodeJS.ErrnoException).code,
+        stack: error.stack,
+      });
+
       if (error.message.includes('timeout')) {
         return NextResponse.json(
-          { error: 'Request timeout. Please try again with fewer questions.' },
+          { error: `Request timeout. Please try again with fewer questions.` },
           { status: 500 }
         );
       }
       if (error.message.includes('unauthorized') || error.message.includes('401')) {
         return NextResponse.json(
-          { error: 'Authentication failed. Please check API configuration.' },
+          { error: `Authentication failed: ${error.message}` },
           { status: 500 }
         );
       }
