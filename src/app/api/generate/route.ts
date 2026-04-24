@@ -8,6 +8,7 @@ interface RegenerateRequest extends QuestionFormData {
 }
 
 export async function POST(request: Request) {
+  console.log("PAT exists:", !!process.env.GITHUB_PAT);
   try {
     const data: RegenerateRequest = await request.json();
     const { subject, topics, difficulty, questionCounts, language, regenerateIndex, regenerateQuestionType } = data;
