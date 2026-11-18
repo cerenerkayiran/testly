@@ -1,8 +1,8 @@
 # Exam Question Generator 📝
 
-A full-stack web application that generates exam questions using OpenAI's GPT models through GitHub Models API. The application supports both English🇺🇸 and Turkish🇹🇷 languages and allows users to generate different types of questions (open-ended, multiple-choice, and true/false).
+A full-stack web application that generates exam questions using Google's Gemini models through the Gemini API. The application supports both English🇺🇸 and Turkish🇹🇷 languages and allows users to generate different types of questions (open-ended, multiple-choice, and true/false).
 
-See demo at: http://testly.cerenerkayiran.uk/
+See demo at: https://testly.cerenerkayiran.uk/
 
 ## Features
 
@@ -20,7 +20,7 @@ See demo at: http://testly.cerenerkayiran.uk/
 ## Prerequisites
 
 - Node.js 18+ and npm
-- GitHub Personal Access Token with access to GitHub Models
+- A free Google Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
 
 ## Setup
 
@@ -35,9 +35,11 @@ cd testly
 npm install
 ```
 
-3. Create a `.env.local` file in the root directory and add your GitHub PAT:
+3. Create a `.env.local` file in the root directory and add your Gemini API key:
 ```
-GITHUB_PAT=your_github_personal_access_token_here
+GEMINI_API_KEY=your_gemini_api_key_here
+# Optional: override the default model (gemini-3.5-flash-lite)
+# GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
 4. Start the development server:
@@ -65,7 +67,7 @@ npm run dev
 - TypeScript
 - Tailwind CSS
 - shadcn/ui components
-- GitHub Models API (OpenAI GPT-4o)
+- Google Gemini API (via the OpenAI-compatible SDK)
 - docx (for Word document generation)
 
 ---
