@@ -8,15 +8,14 @@ interface RegenerateRequest extends QuestionFormData {
 }
 
 export async function POST(request: Request) {
-  console.log("PAT exists:", !!process.env.GITHUB_PAT);
   try {
     const data: RegenerateRequest = await request.json();
     const { subject, topics, difficulty, questionCounts, language, regenerateIndex, regenerateQuestionType } = data;
 
-    // Check if GitHub PAT is available
-    const token = process.env.GITHUB_PAT;
+    // Check if Gemini API key is available
+    const token = process.env.GEMINI_API_KEY;
     if (!token) {
-      console.error('GITHUB_PAT environment variable is not set');
+      console.error('GEMINI_API_KEY environment variable is not set');
       return NextResponse.json(
         { error: 'API configuration error: Missing authentication token' },
         { status: 500 }
@@ -40,28 +39,28 @@ export async function POST(request: Request) {
       prompt = `Generate exam questions for the following specifications:\nSubject: ${subject}\nTopics: ${topics.join(', ')}\nDifficulty: ${difficulty}\nLanguage: ${language}\n\nPlease generate:\n- ${questionCounts['open-ended']} open-ended questions\n- ${questionCounts['multiple-choice']} multiple-choice questions (with 4 options each)\n- ${questionCounts['true-false']} true/false questions\n\nFormat the response as a JSON array of objects with the following structure:\n{\n  "type": "open-ended" | "multiple-choice" | "true-false",\n  "question": "the question text",\n  "options": ["option1", "option2", "option3", "option4"] (only for multiple-choice),\n  "answer": "the correct answer"\n}\n\nIMPORTANT: Make sure all questions and answers are in ${language === 'en' ? 'English' : 'Turkish'}. ${language === 'tr' ? 'For true/false questions in Turkish, use "Doğru" for true answers and "Yanlış" for false answers. Never use "True" or "False" for Turkish questions.' : 'For true/false questions, use "True" or "False" as answers.'}`;
     }
 
-    const endpoint = "https://models.inference.ai.azure.com";
-    const modelName = "gpt-4o";
+    // Gemini via its OpenAI-compatible endpoint (free tier)
+    const endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/";
+    const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
     const client = new OpenAI({
       baseURL: endpoint,
       apiKey: token,
     });
 
-    console.log('Making API request to GitHub Models...');
+    console.log('Making API request to Gemini...');
     const response = await client.chat.completions.create({
       messages: [
-        { role: "system", content: "" },
         { role: "user", content: prompt }
       ],
       model: modelName,
       temperature: 1,
-      max_tokens: 4096,
+      max_tokens: 8192,
       top_p: 1
     });
 
     if (!response.choices || !response.choices[0] || !response.choices[0].message) {
-      console.error('Invalid response from GitHub Models API:', response);
+      console.error('Invalid response from Gemini API:', response);
       return NextResponse.json(
         { error: 'Invalid response from AI service' },
         { status: 500 }
@@ -70,7 +69,7 @@ export async function POST(request: Request) {
 
     const text = response.choices[0].message.content;
     if (!text) {
-      console.error('Empty response from GitHub Models API');
+      console.error('Empty response from Gemini API');
       return NextResponse.json(
         { error: 'Empty response from AI service' },
         { status: 500 }
