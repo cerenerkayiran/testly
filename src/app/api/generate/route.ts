@@ -41,7 +41,7 @@ export async function POST(request: Request) {
 
     // Gemini via its OpenAI-compatible endpoint (free tier)
     const endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/";
-    const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+    const modelName = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
 
     const client = new OpenAI({
       baseURL: endpoint,
